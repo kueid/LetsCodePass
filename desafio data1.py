@@ -14,40 +14,32 @@ textoplano = ''
 textocifrado = []
 cifradocodigo = []
 codigoplano = []
-opc = int(input('opção: '))
+opc = int(input('opção 0 para criptografar, opção 1 para descriptografar: '))
 
 while True:
-    if opc == 1:
+    if opc == 0:
         chave_secreta_k = int(input('digite o numero da chave secreta: '))
-        textoplano = input('digite o texto pra cifrar: ')
+        textoplano = str(input('digite o texto pra cifrar: '))
         for letra in textoplano:
             codigoplano.append(esquema[letra])
-
         for i, num in enumerate(codigoplano):
             cifradocodigo.append((codigoplano[(chave_secreta_k * i) % len(codigoplano)] - i) % 28)
-
         for i in cifradocodigo:
             textocifrado.append(pega_chave(i, esquema))
-
         print(''.join(textocifrado))
         break
-    if opc == 2:
+    if opc == 1:
         chave_secreta_k = int(input('digite o numero da chave secreta: '))
-        textoplano = input('digite o texto pra descifrar: ')
-
+        textoplano = input('digite o texto pra desencriptar: ')
         for letra in textoplano:
             codigoplano.append(esquema[letra])
             cifradocodigo.append(0)
-
         for i, num in enumerate(codigoplano):
             cifradocodigo[(chave_secreta_k * i) % len(codigoplano)] = ((codigoplano[i] + i) % 28)
-
         for i in cifradocodigo:
             textocifrado.append(pega_chave(i, esquema))
-
         print(''.join(textocifrado))
-
         break
-    if opc != 2 or 1:
+    if opc != 0 or 1:
         opc = int(input('opção: '))
         continue
